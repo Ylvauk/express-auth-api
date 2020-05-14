@@ -1,0 +1,23 @@
+{
+  "name": "express-auth-api",
+  "version": "1.0.0",
+  "description": "Starter repo for adding authentication to Express APIs with Passport",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node db/seed.js"
+  },
+  "keywords": [],
+  "author": "Jennifer Meade",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
