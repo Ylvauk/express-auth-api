@@ -135,7 +135,7 @@ We already have a user model to start with, but we need a basic controller to te
 
 ```js
 const express = require('express');
-const User = require('../db/models/user_model');
+const User = require('../models/User');
 
 const router = express.Router();
 
