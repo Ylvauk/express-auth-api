@@ -158,7 +158,7 @@ Now require and use the userController in the index.js.
 
 ```js
 // Require the user resource routes and controllers
-const userController = require('./controllers/users');
+const userController = require('./controllers/usersController');
 app.use('/api', userController);
 ```
 
