@@ -4,10 +4,7 @@ const mongoose = require('mongoose');
 // Use a ternary that looks for the presence of a `NODE_ENV` environment variable
 // If `NODE_ENV` is set to production, use the URL for our database stored in the
 // `DB_URL` environmental variable.  If not, just use the local db address.
-const mongoURI =
-  process.env.NODE_ENV === 'production'
-    ? process.env.DB_URL
-    : 'mongodb://localhost/express-books';
+const mongoURI = process.env.DATABASE_URL;
 
 // Use Mongoose's connect method to connect to MongoDB by passing it the db URI.
 // Pass a second argument which is an object storing the options for the connection.
