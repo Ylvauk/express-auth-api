@@ -12,6 +12,7 @@
 
 1. Fork and clone this repository.
 1. Install dependencies with `npm i`.
+1. Create a `.env` file and add your `DATABASE_URL` with the MongoDB Atlas connection string.
 1. Seed your database with `npm run seed`.
 1. Start your development server with `npm run dev`.
 1. Test all of the routes in the booksController.js file using Postman.
@@ -47,12 +48,12 @@ Let's add some middleware of our own to our app! Inside the middleware directory
 
 ```js
 const requestLogger = function (req, res, next) {
-  console.log('\n===== Incoming Request =====\n');
-  console.log(`${new Date()}`);
-  console.log(`${req.method} ${req.url}`);
-  console.log(`body ${JSON.stringify(req.body)}`);
-  console.log('\n============================\n');
-  next();
+	console.log('\n===== Incoming Request =====\n');
+	console.log(`${new Date()}`);
+	console.log(`${req.method} ${req.url}`);
+	console.log(`body ${JSON.stringify(req.body)}`);
+	console.log('\n============================\n');
+	next();
 };
 
 module.exports = requestLogger;
@@ -79,41 +80,41 @@ To use the error handler, we'll need to edit our `booksController.js` so that ea
 ```js
 // GET (index) /api/books/
 router.get('/', (req, res, next) => {
-  Book.find()
-    .then((books) => res.json(books))
-    .catch(next);
+	Book.find()
+		.then((books) => res.json(books))
+		.catch(next);
 });
 
 // GET (show) /api/books/5eb579b99b05e67b897e860b
 router.get('/:id', (req, res, next) => {
-  Book.findById(req.params.id)
-    .then((book) => res.json(book))
-    .catch(next);
+	Book.findById(req.params.id)
+		.then((book) => res.json(book))
+		.catch(next);
 });
 
 // POST (create) /api/books/
 router.post('/', (req, res, next) => {
-  Book.create(req.body)
-    .then((book) => res.json(book))
-    .catch(next);
+	Book.create(req.body)
+		.then((book) => res.json(book))
+		.catch(next);
 });
 
 // PUT (update) /api/books/5eb579b99b05e67b897e860b
 router.put('/:id', (req, res, next) => {
-  Book.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true,
-  })
-    .then((book) => res.json(book))
-    .catch(next);
+	Book.findOneAndUpdate({ _id: req.params.id }, req.body, {
+		new: true,
+	})
+		.then((book) => res.json(book))
+		.catch(next);
 });
 
 // DELETE (delete) /api/books/5eb579b99b05e67b897e860b
 router.delete('/:id', (req, res, next) => {
-  Book.findOneAndDelete({
-    _id: req.params.id,
-  })
-    .then((book) => res.json(book))
-    .catch(next);
+	Book.findOneAndDelete({
+		_id: req.params.id,
+	})
+		.then((book) => res.json(book))
+		.catch(next);
 });
 ```
 
@@ -142,9 +143,9 @@ const router = express.Router();
 // SIGN UP
 // POST /api/signup
 router.post('/signup', (req, res, next) => {
-  User.create(req.body)
-    .then((user) => res.status(201).json(user))
-    .catch(next);
+	User.create(req.body)
+		.then((user) => res.status(201).json(user))
+		.catch(next);
 });
 
 // SIGN IN
@@ -170,28 +171,28 @@ You may have noticed that when you created a new user, you got back a user docum
 
 ```js
 const userSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
-    toJSON: {
-      virtuals: true,
-      // ret is the returned Mongoose document
-      transform: (_doc, ret) => {
-        delete ret.password;
-        return ret;
-      },
-    },
-  }
+	{
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+	},
+	{
+		timestamps: true,
+		toJSON: {
+			virtuals: true,
+			// ret is the returned Mongoose document
+			transform: (_doc, ret) => {
+				delete ret.password;
+				return ret;
+			},
+		},
+	}
 );
 ```
 
@@ -301,7 +302,7 @@ const jwt = require('jsonwebtoken');
 // Create a secret to be used to encrypt/decrypt the token
 // This can be any string value you want -- even gibberish.
 const secret =
-  process.env.JWT_SECRET || 'some string value only your app knows';
+	process.env.JWT_SECRET || 'some string value only your app knows';
 
 // Require the specific `strategy` we'll use to authenticate
 // Require the method that will handle extracting the token
@@ -310,14 +311,14 @@ const { Strategy, ExtractJwt } = require('passport-jwt');
 
 // Minimum required options for passport-jwt
 const opts = {
-  // How passport should find and extract the token from
-  // the request.  We'll be sending it as a `bearer` token
-  // when we make requests from our front end.
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  // Any secret string to use that is unique to your app
-  // We should store this in an environment variable so it
-  // isn't ever pushed to GitHub!
-  secretOrKey: secret,
+	// How passport should find and extract the token from
+	// the request.  We'll be sending it as a `bearer` token
+	// when we make requests from our front end.
+	jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+	// Any secret string to use that is unique to your app
+	// We should store this in an environment variable so it
+	// isn't ever pushed to GitHub!
+	secretOrKey: secret,
 };
 
 // Require the user model
@@ -330,19 +331,19 @@ const User = require('../models/User');
 // extracted and decrypted by passport from the token that we get from
 // the client request!  This data (jwt_payload) will include the user's id!
 const strategy = new Strategy(opts, function (jwt_payload, done) {
-  // In the callback we run our custom code. With the data extracted from
-  // the token that we're passed as jwt_payload we'll have the user's id.
-  // Using Mongoose's `.findOneById()` method, we find the user in our database
-  User.findById(jwt_payload.id)
-    // To pass the user on to our route, we use the `done` method that
-    // that was passed as part of the callback.  The first parameter of
-    // done is an error, so we'll pass null for that argument and then
-    // pass the user doc from Mongoose.  This adds the user to the request object
-    // as request.user!
-    .then((user) => done(null, user))
-    // If there was an error, we pass it to done so it is eventually handled
-    // by our error handlers in Express
-    .catch((err) => done(err));
+	// In the callback we run our custom code. With the data extracted from
+	// the token that we're passed as jwt_payload we'll have the user's id.
+	// Using Mongoose's `.findOneById()` method, we find the user in our database
+	User.findById(jwt_payload.id)
+		// To pass the user on to our route, we use the `done` method that
+		// that was passed as part of the callback.  The first parameter of
+		// done is an error, so we'll pass null for that argument and then
+		// pass the user doc from Mongoose.  This adds the user to the request object
+		// as request.user!
+		.then((user) => done(null, user))
+		// If there was an error, we pass it to done so it is eventually handled
+		// by our error handlers in Express
+		.catch((err) => done(err));
 });
 
 // Now that we've constructed the strategy, we 'register' it so that
@@ -360,29 +361,29 @@ const requireToken = passport.authenticate('jwt', { session: false });
 // Create a function that takes the request and a user document
 // and uses them to create a token to send back to the user
 const createUserToken = (req, user) => {
-  // Make sure that we have a user, if it's null that means we didn't
-  // find the email in the database.  If there is a user, make sure
-  // that the password is correct.  For security reason, we don't want
-  // to tell the client whether the email was not found or that the
-  // password was incorrect.  Instead we send the same message for both
-  // making it much harder for hackers.
-  if (
-    !user ||
-    !req.body.password ||
-    !bcrypt.compareSync(req.body.password, user.password)
-  ) {
-    const err = new Error('The provided username or password is incorrect');
-    err.statusCode = 422;
-    throw err;
-  }
-  // If no error was thrown, we create the token from user's id and
-  // return the token
-  return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 });
+	// Make sure that we have a user, if it's null that means we didn't
+	// find the email in the database.  If there is a user, make sure
+	// that the password is correct.  For security reason, we don't want
+	// to tell the client whether the email was not found or that the
+	// password was incorrect.  Instead we send the same message for both
+	// making it much harder for hackers.
+	if (
+		!user ||
+		!req.body.password ||
+		!bcrypt.compareSync(req.body.password, user.password)
+	) {
+		const err = new Error('The provided username or password is incorrect');
+		err.statusCode = 422;
+		throw err;
+	}
+	// If no error was thrown, we create the token from user's id and
+	// return the token
+	return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 });
 };
 
 module.exports = {
-  requireToken,
-  createUserToken,
+	requireToken,
+	createUserToken,
 };
 ```
 
@@ -406,14 +407,14 @@ const { createUserToken } = require('../middleware/auth');
 // SIGN IN
 // POST /api/signin
 router.post('/signin', (req, res, next) => {
-  User.findOne({ email: req.body.email })
-    // Pass the user and the request to createUserToken
-    .then((user) => createUserToken(req, user))
-    // createUserToken will either throw an error that
-    // will be caught by our error handler or send back
-    // a token that we'll in turn send to the client.
-    .then((token) => res.json({ token }))
-    .catch(next);
+	User.findOne({ email: req.body.email })
+		// Pass the user and the request to createUserToken
+		.then((user) => createUserToken(req, user))
+		// createUserToken will either throw an error that
+		// will be caught by our error handler or send back
+		// a token that we'll in turn send to the client.
+		.then((token) => res.json({ token }))
+		.catch(next);
 });
 ```
 
