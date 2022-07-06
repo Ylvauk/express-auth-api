@@ -473,7 +473,7 @@ Try getting the books in the browser or Postman!
 Okay, so now we can't get any data. To make a request with Bearer Authorization we need to add a header to our request. In Postman, add an authorization header with the value set to the word 'Bearer', followed by a space, followed by a valid token that you received when you last ran the signin POST operation.
 
 ```md
-Bearer your-long-ass-valid-token
+Bearer your-valid-token
 ```
 
 > **NOTE:**
