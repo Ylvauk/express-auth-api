@@ -473,7 +473,7 @@ Try getting the books in the browser or Postman!
 Okay, so now we can't get any data. To make a request with Bearer Authorization we need to add a header to our request. In Postman, add an authorization header with the value set to the word 'Bearer', followed by a space, followed by a valid token that you received when you last ran the signin POST operation.
 
 ```md
-Bearer your-valid-token
+Bearer your-incredibly-long-valid-token
 ```
 
 > **NOTE:**
@@ -482,12 +482,12 @@ Bearer your-valid-token
 
 ## BONUS: Add Authorization
 
-In the MERN lab, we'll take this to the next step and add authorization so that users may only update or delete records where they are the owner of the document.
+Take this to the next step and add authorization so that users may only update or delete records where they are the owner of the document.
 
 ## Resources
 
-[Express API Doc: Error Handling](https://expressjs.com/en/guide/error-handling.html)
-[Central Error Handling in Express](https://dev.to/nedsoft/central-error-handling-in-express-3aej)
-[Using Postman Environment Variables & Auth Tokens](https://medium.com/@codebyjeff/using-postman-environment-variables-auth-tokens-ea9c4fe9d3d7)
-[Using Postman (with Authentication)](https://developer.here.com/documentation/authentication/dev_guide/topics/using-postman.html)
-[Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=0g0Of8jlhN8)
+- [Express API Doc: Error Handling](https://expressjs.com/en/guide/error-handling.html)
+- [Central Error Handling in Express](https://dev.to/nedsoft/central-error-handling-in-express-3aej)
+- [Using Postman Environment Variables & Auth Tokens](https://medium.com/@codebyjeff/using-postman-environment-variables-auth-tokens-ea9c4fe9d3d7)
+- [Using Postman (with Authentication)](https://developer.here.com/documentation/authentication/dev_guide/topics/using-postman.html)
+- [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=0g0Of8jlhN8)
