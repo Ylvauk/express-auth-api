@@ -226,8 +226,8 @@ router.post('/signup', async (req, res, next) => {
     // store the results of any asynchronous calls in variables
     // and use the await keyword before them
     const password = await bcrypt.hash(req.body.password, 10);
-    const user = await User.create({ email, password });
-    res.status(201).json(user);
+    const user = await User.create({ email: req.body.email, password });
+    return res.status(201).json(user);
   } catch (error) {
     // return the next callback and pass it the error from catch
     return next(error);
